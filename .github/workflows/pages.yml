@@ -1,0 +1,23 @@
+# Build this book with the shared platform and publish it to GitHub Pages.
+# The steps live in AwesomeTechBooks/platform; this file only calls them.
+name: Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  book:
+    uses: AwesomeTechBooks/platform/.github/workflows/book.yml@v1
+    with:
+      prebuilt: html
